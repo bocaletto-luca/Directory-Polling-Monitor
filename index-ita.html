@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Directory Polling Monitor – Strumento Python self-contained</title>
+  <meta name="description" content="Directory Polling Monitor è un tool Python puro per monitorare directory via polling. No dipendenze esterne, interfaccia a menu testuale e filtri avanzati.">
+  <meta name="keywords" content="monitor directory, Python, polling, file watcher, self-contained, filtri glob, nessuna dipendenza">
+  <meta name="author" content="Bocaletto Luca">
+  <link rel="canonical" href="https://bocaletto-luca.github.io/Directory-Polling-Monitor/">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Directory Polling Monitor">
+  <meta property="og:title" content="Directory Polling Monitor – Strumento Python self-contained">
+  <meta property="og:description" content="Monitora file e cartelle in tempo reale con un semplice script Python. Nessuna libreria esterna richiesta.">
+  <meta property="og:url" content="https://bocaletto-luca.github.io/Directory-Polling-Monitor/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Directory Polling Monitor">
+  <meta name="twitter:description" content="Script Python puro per monitorare directory via polling, con filtri avanzati e menu testuale.">
+
+  <style>
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; margin: 0; }
+    header { background: #34495e; color: #fff; padding: 2rem 1rem; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5rem; }
+    header p { margin: 0.5rem 0 1.5rem; font-size: 1.1rem; }
+    .btn { display: inline-block; margin: .5rem; padding: .6rem 1.2rem; background: #e67e22; color: #fff; text-decoration: none; border-radius: 4px; }
+    main { max-width: 900px; margin: auto; padding: 2rem 1rem; }
+    section { margin-bottom: 2rem; }
+    h2 { color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: .3rem; }
+    ul { padding-left: 1.2rem; }
+    pre, code { background: #f4f4f4; padding: .4rem .6rem; border-radius: 4px; font-family: monospace; }
+    pre { overflow-x: auto; margin: 1rem 0; }
+    footer { background: #ecf0f1; text-align: center; padding: 1.5rem 1rem; font-size: .9rem; color: #555; }
+    footer a { color: #2980b9; text-decoration: none; margin: 0 .5rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Directory Polling Monitor</h1>
+    <p>Script Python self-contained per monitorare directory via polling</p>
+    <a class="btn" href="https://github.com/bocaletto-luca/Directory-Polling-Monitor" target="_blank">Vedi su GitHub</a>
+    <a class="btn" href="https://bocaletto-luca.github.io/Directory-Polling-Monitor/" target="_blank">Homepage</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>Panoramica</h2>
+      <p>Directory Polling Monitor è un file unico in Python (solo stdlib) che consente di sorvegliare una o più cartelle per rilevare creazioni, modifiche e cancellazioni. Offre filtri glob avanzati, include/esclude file nascosti e restituisce i risultati in tempo reale tramite un menu testuale.</p>
+    </section>
+
+    <section>
+      <h2>Caratteristiche principali</h2>
+      <ul>
+        <li>Monitoraggio simultaneo di più directory</li>
+        <li>Scansione ricorsiva o non ricorsiva</li>
+        <li>Inclusione/esclusione di file e cartelle nascosti</li>
+        <li>Filtri avanzati con pattern glob di include ed exclude</li>
+        <li>Log in tempo reale su console e/o su file</li>
+        <li>Interfaccia a menu testuale intuitiva</li>
+        <li>Premi <code>ESC</code> per interrompere e tornare al menu</li>
+        <li>Zero dipendenze esterne – compatibile con Python 3.6+</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Installazione</h2>
+      <pre><code># Clona il repository
+git clone https://github.com/bocaletto-luca/Directory-Polling-Monitor.git
+cd Directory-Polling-Monitor
+
+# (Opzionale) rendi eseguibile
+chmod +x monitor_poll_menu.py
+</code></pre>
+      <p>Assicurati di avere Python 3.6 o successivo:</p>
+      <pre><code>python3 --version</code></pre>
+    </section>
+
+    <section>
+      <h2>Uso</h2>
+      <pre><code>python3 monitor_poll_menu.py
+# oppure, se eseguibile:
+./monitor_poll_menu.py
+</code></pre>
+      <p>Dopo l’avvio, utilizza il menu per:</p>
+      <ul>
+        <li>Aggiungere o rimuovere directory da sorvegliare</li>
+        <li>Impostare intervallo di polling e modalità ricorsiva</li>
+        <li>Includere o escludere file e cartelle nascosti</li>
+        <li>Definire pattern glob per filtri avanzati</li>
+        <li>Avviare o interrompere (ESC) il monitoraggio</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Filtri avanzati</h2>
+      <p>Nel sottomenu “Filtri avanzati” è possibile gestire pattern glob:</p>
+      <ul>
+        <li><code>*.log</code> – monitora solo i file di log</li>
+        <li><code>data/**/*.csv</code> – monitora i CSV in qualsiasi sottocartella</li>
+        <li><code>temp/*</code> – esclude tutto sotto <code>temp/</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Funzionamento del tasto ESC</h2>
+      <p>Durante il monitoraggio, il terminale viene posto in modalità “cbreak” per rilevare singoli tasti. Premendo <code>ESC</code> si esce immediatamente dal loop, si ripristinano le impostazioni del terminale e si ritorna al menu principale.</p>
+    </section>
+
+    <section>
+      <h2>Formato dei log</h2>
+      <pre><code>2025-07-05 22:58:53,080 INFO     [ /percorso/dir ] +Added   FILE: esempio.txt
+2025-07-05 22:59:12,345 INFO     [ /percorso/dir ] *Modified DIR : docs/
+2025-07-05 22:59:20,123 INFO     [ /percorso/dir ] -Removed  FILE: vecchio.log
+</code></pre>
+      <p>
+        <strong>+Added</strong> = nuovo file/cartella<br>
+        <strong>*Modified</strong> = modifica timestamp<br>
+        <strong>-Removed</strong> = eliminazione
+      </p>
+    </section>
+
+    <section>
+      <h2>Licenza</h2>
+      <p>Distribuito sotto licenza MIT. Vedi <a href="LICENSE">LICENSE</a> per i dettagli.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Bocaletto Luca</p>
+    <p>
+      <a href="https://bocaletto-luca.github.io/Directory-Polling-Monitor/" target="_blank">Homepage</a> |
+      <a href="https://github.com/bocaletto-luca/Directory-Polling-Monitor" target="_blank">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
