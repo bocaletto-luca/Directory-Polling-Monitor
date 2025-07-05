@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Directory Polling Monitor – Self-Contained Python Tool</title>
+  <meta name="description" content="Directory Polling Monitor is a self-contained Python script for real-time file & folder monitoring using polling. No external dependencies.">
+  <meta name="keywords" content="directory monitoring, python tool, polling, file watcher, self-contained, no dependencies">
+  <meta name="author" content="Bocaletto Luca">
+  <link rel="canonical" href="https://bocaletto-luca.github.io/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Directory Polling Monitor – Self-Contained Python Tool">
+  <meta property="og:description" content="Real-time directory monitoring with a pure-Python polling script, no external libraries required.">
+  <meta property="og:url" content="https://bocaletto-luca.github.io/">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Directory Polling Monitor">
+  <meta name="twitter:description" content="Self-contained Python script for real-time file & folder monitoring.">
+  
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0;}
+    header { background: #2c3e50; color: #fff; padding: 2rem 1rem; text-align: center;}
+    header h1 { margin: 0; font-size: 2.5rem;}
+    header p { margin: .5rem 0 1.5rem; font-size: 1.2rem;}
+    .btn { display: inline-block; padding: .5rem 1rem; background: #e67e22; color: #fff; text-decoration: none; border-radius: 4px;}
+    main { padding: 2rem 1rem; max-width: 900px; margin: auto;}
+    section + section { margin-top: 2rem; }
+    h2 { border-bottom: 2px solid #eee; padding-bottom: .5rem; color: #34495e;}
+    ul { margin: .5rem 0 1rem; padding-left: 1.2rem; }
+    code, pre { background: #f4f4f4; padding: .2rem .4rem; border-radius: 4px; }
+    pre { padding: 1rem; overflow-x: auto; }
+    footer { text-align: center; padding: 1.5rem 0; background: #ecf0f1; color: #555; margin-top: 3rem;}
+    footer a { color: #2980b9; text-decoration: none; }
+    .inline-links a { margin: 0 .5rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Directory Polling Monitor</h1>
+    <p>Pure-Python, polling-based file & folder watcher. No external libraries required.</p>
+    <a class="btn" href="https://github.com/bocaletto-luca/directory-polling-monitor" target="_blank">GitHub Repository</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>
+        Directory Polling Monitor is a single-file Python script (stdlib only) that
+        lets you watch multiple directories for changes—creations, deletions, modifications—
+        via configurable polling intervals. Press <code>ESC</code> at any time to stop
+        monitoring and return to the menu.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li>Monitor one or more directories simultaneously</li>
+        <li>Recursive or non-recursive scan modes</li>
+        <li>Include or exclude hidden files and folders</li>
+        <li>Advanced glob filters for include/exclude patterns</li>
+        <li>Real-time logging to console and/or file</li>
+        <li>Interactive text-menu interface</li>
+        <li>ESC key to interrupt and return to configuration</li>
+        <li>Zero external dependencies (Python 3.6+ stdlib only)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Installation</h2>
+      <pre><code># clone or download
+git clone https://github.com/bocaletto-luca/directory-polling-monitor.git
+cd directory-polling-monitor
+
+# (optional) make executable
+chmod +x monitor_poll_menu.py
+</code></pre>
+      <p>Requires Python 3.6 or newer.</p>
+    </section>
+
+    <section>
+      <h2>Usage</h2>
+      <pre><code>python3 monitor_poll_menu.py
+# or, if executable:
+./monitor_poll_menu.py
+</code></pre>
+      <p>
+        Use the interactive menu to:<br>
+        <strong>1)</strong> Add/remove directories<br>
+        <strong>2)</strong> Toggle recursion and hidden entries<br>
+        <strong>3)</strong> Set polling interval and log file<br>
+        <strong>4)</strong> Define include/exclude glob filters<br>
+        <strong>5)</strong> Start or stop monitoring
+      </p>
+    </section>
+
+    <section>
+      <h2>Advanced Filters</h2>
+      <p>
+        In the menu’s <em>Advanced filters</em> submenu, you can manage <code>INCLUDE</code> and
+        <code>EXCLUDE</code> patterns using Unix-style globs:
+      </p>
+      <ul>
+        <li><code>*.log</code> to include only log files</li>
+        <li><code>data/**/*.csv</code> to include CSVs in any subfolder</li>
+        <li><code>temp/*</code> to exclude everything under <code>temp/</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How ESC Works</h2>
+      <p>
+        During monitoring, the script temporarily switches the terminal to “cbreak” mode,
+        allowing single-key detection. Pressing the <code>ESC</code> key immediately breaks
+        the loop, restores the terminal to normal mode, and returns you to the main menu.
+      </p>
+    </section>
+
+    <section>
+      <h2>Logging Format</h2>
+      <pre><code>2025-07-05 22:58:53,080 INFO     [ /path/to/dir ] +Added   FILE: example.txt
+2025-07-05 22:59:12,345 INFO     [ /path/to/dir ] *Modified DIR : docs/
+2025-07-05 22:59:20,123 INFO     [ /path/to/dir ] -Removed  FILE: old.log
+</code></pre>
+      <p>
+        <code>+Added</code> = creation<br>
+        <code>*Modified</code> = timestamp changed<br>
+        <code>-Removed</code> = deletion
+      </p>
+    </section>
+
+    <section>
+      <h2>License</h2>
+      <p>Distributed under the MIT License. See <a href="LICENSE">LICENSE</a> for details.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Bocaletto Luca</p>
+    <p class="inline-links">
+      <a href="https://bocaletto-luca.github.io/" target="_blank">Homepage</a> |
+      <a href="https://github.com/bocaletto-luca" target="_blank">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
